@@ -1,85 +1,89 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>选项卡</title>
-        <style type="text/css">
-            .active{
-                background:white;
-            }
-            #div1 div{
-                width:200px;
-                height: 200px;
-                border: 1px solid white;
-                margin-top:10px;
-                display: none;
-            }
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>选项卡</title>
+    <style type="text/css">
+      .wrap{
+           width: 300px;
+           height: 300px;
+           border: 1px solid #000;
+           float: left;
+           margin-right: 20px;
+       }
+       .nav {
+           margin: 0;
+           width: 300px;
+           height: 50px;
+           border: 1px solid #000;
+       }
+       .nav span{
+           display:block;
+           float: left;
+           width:100px;
+           height: 50px;
+           line-height: 50px;
+           text-align: center;
+       }
+       .nav .active{
+           background: yellow;
+           cursor: pointer;
+       }
+      .wrap div{
+           width: 300px;
+           height: 250px;
+           font-size: 30px;
+           line-height: 250px;
+           text-align: center;
+           display: none;
+       }
+       .wrap .on{
+           display: block;
+       }
         </style>
     </head>
     <body>
-        <div id="div1">
-            <input type="button"  value="新闻" class="active"/>
-            <input type="button"  value="军事" />
-            <input type="button"  value="体育" />
-            <input type="button"  value="音乐" />
-            <div style="display: block;background-color:#CCC;">
-                <ul>
-                    <li>新闻之家</li>
-                    <li>新闻之家</li>
-                    <li>新闻之家</li>
-                    <li>新闻之家</li>
-                    <li>新闻之家</li>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <li>军事之家</li>
-                    <li>军事之家</li>
-                    <li>军事之家</li>
-                    <li>军事之家</li>
-                    <li>军事之家</li>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <li>体育纵横</li>
-                    <li>体育纵横</li>
-                    <li>体育纵横</li>
-                    <li>体育纵横</li>
-                    <li>体育纵横</li>
-                </ul>
-            </div>
-            <div>
-                <ul>
-                    <li>音乐在线</li>
-                    <li>音乐在线</li>
-                    <li>音乐在线</li>
-                    <li>音乐在线</li>
-                    <li>音乐在线</li>
-                </ul>
-            </div>
-        </div>
+        <div id="box1" class="wrap">
+    <p class="nav">
+        <span class="active">1</span>
+        <span>2</span>
+        <span>娱乐</span>
+    </p>
+    <div class="on">1</div>
+    <div>2</div>
+    <div>3</div>
+</div>
+<div id="box2" class="wrap">
+    <p class="nav">
+        <span class="active">1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+    <div class="on">1</div>
+    <div>2</div>
+    <div>3</div>
+</div>
     </body>
     <script type="text/javascript">
-            window.onload=function()
-            {
-                var one=document.getElementById("div1");
-                var two=one.getElementsByTagName("input");
-                var three=one.getElementsByTagName("div");
-                for(var i=0;i<two.length;i++)
-                {
-                    two[i].index=i;//index: 人为添加的标记，目的是获取当前的点击的那个按钮
-                    two[i].onclick=function()
-                    {
-                        for(var i=0;i<two.length;i++)
-                        {
-                            two[i].className="";//初始化，取消所有按钮的背景
-                            three[i].style.display="none";//初始化，所有div不显示
+            function tab(id,ming){
+                var one = document.getElementById(id);
+                var two = one.getElementsByTagName('span');
+                var three = one.getElementsByTagName('div');
+                for (var i =0;i<two.length;i++){
+                    two[i].index=i; //
+                    two[i][ming] = function () {
+                        for (var i = 0; i<two.length;i++){
+                            two[i].className='';
+                            three[i].className='';
                         }
-                        this.className="active";
-                        three[this.index].style.display="block";
+                        this.className = 'active';
+                        three[this.index].className='on';
                     }
                 }
+            }
+            window.onload = function () {
+                tab('box1','onclick');
+                tab('box2','onmousemove');
             }
         </script>
 </html>
